@@ -1,0 +1,741 @@
+using System;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+namespace AsphodelusNative.DXGI;
+
+/// <summary>
+/// INTERFACE <b>IDXGISwapChain4</b> : IDXGISwapChain3<br/>
+/// DXGI1_5.h
+/// </summary>
+unsafe public interface ISwapChain4 : ISwapChain3 {
+	/// <summary>
+	/// STDMETHODCALLTYPE <b>HRESULT IDXGISwapChain4::SetHDRMetaData (DXGI_HDR_METADATA_TYPE Type, UINT Size, void* pMetaData)</b><br/>
+	/// </summary>
+	/// <param name="type">_In_ <b>DXGI_HDR_METADATA_TYPE Type</b></param>
+	/// <param name="size">_In_ <b>UINT Size</b></param>
+	/// <param name="pMetaData">_In_reads_opt_(Size) <b>void* pMetaData</b></param>
+	int SetHDRMetaData (HdrMetadataType type, uint size, void* pMetaData);
+}
+
+/// <summary>
+/// Instance of <b>IDXGISwapChain4</b><br/>
+/// DXGI1_5.h
+/// </summary>
+unsafe public readonly struct SwapChain4 : ISwapChain4 {
+//unsafe public readonly struct ISwapChain4Obj : ISwapChain4 {
+
+	readonly void** _pointer;
+
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	readonly SwapChain4* GetCurrentPointer () => (SwapChain4*) Unsafe.AsPointer (ref Unsafe.AsRef (in this));
+	//readonly ISwapChain4Obj* GetCurrentPointer () => (ISwapChain4Obj*) Unsafe.AsPointer (ref Unsafe.AsRef (in this));
+
+	/// <inheritdoc />
+	public static Guid GUID { get => _guid; }
+	static readonly Guid _guid = new (0x3d585d5a, 0xbd4a, 0x489e, 0xb1, 0xf4, 0x3d, 0xbc, 0xb6, 0x45, 0x2f, 0xfb);
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int QueryInterface (Guid riid, void** ppvObject) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->QueryInterface (ptr, riid, ppvObject);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int QueryInterface (Guid riid, out void* ppvObject) {
+		fixed (void** _ppvObject = &ppvObject) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->QueryInterface (ptr, riid, _ppvObject);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly uint AddRef () {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->AddRef (ptr);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly uint Release () {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->Release (ptr);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int SetPrivateData (Guid name, uint dataSize, void* pData) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->SetPrivateData (ptr, name, dataSize, pData);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int SetPrivateDataInterface<T0> (Guid name, T0* pUnknown) where T0 : unmanaged, IUnknown {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->SetPrivateDataInterface (ptr, name, pUnknown);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetPrivateData (Guid name, uint* pDataSize, void* pData) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetPrivateData (ptr, name, pDataSize, pData);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetParent (Guid riid, void** ppParent) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetParent (ptr, riid, ppParent);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetParent (Guid riid, out void* ppParent) {
+		fixed (void** _ppParent = &ppParent) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetParent (ptr, riid, _ppParent);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetDevice (Guid riid, void** ppDevice) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetDevice (ptr, riid, ppDevice);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetDevice (Guid riid, out void* ppDevice) {
+		fixed (void** _ppDevice = &ppDevice) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetDevice (ptr, riid, _ppDevice);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int Present (uint syncInterval, uint flags) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->Present (ptr, syncInterval, flags);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetBuffer (uint buffer, Guid riid, void** ppSurface) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetBuffer (ptr, buffer, riid, ppSurface);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetBuffer (uint buffer, Guid riid, out void* ppSurface) {
+		fixed (void** _ppSurface = &ppSurface) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetBuffer (ptr, buffer, riid, _ppSurface);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int SetFullscreenState<T0> (bool fullscreen, T0* pTarget) where T0 : unmanaged, IOutput {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->SetFullscreenState (ptr, fullscreen ? 1U : 0U, pTarget);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetFullscreenState<T0> (uint* pFullscreen, T0** ppTarget) where T0 : unmanaged, IOutput {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetFullscreenState (ptr, pFullscreen, (void**) ppTarget);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetFullscreenState<T0> (out bool pFullscreen, out T0* ppTarget) where T0 : unmanaged, IOutput {
+		uint _pFullscreen;
+		fixed (T0** _ppTarget = &ppTarget) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetFullscreenState (ptr, &_pFullscreen, (void**) _ppTarget);
+			pFullscreen = _pFullscreen != 0;
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetDesc (SwapChainDesc* pDesc) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetDesc (ptr, pDesc);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetDesc (out SwapChainDesc pDesc) {
+		fixed (SwapChainDesc* _pDesc = &pDesc) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetDesc (ptr, _pDesc);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int ResizeBuffers (uint bufferCount, uint width, uint height, Format newFormat, uint swapChainFlags) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->ResizeBuffers (ptr, bufferCount, width, height, newFormat, swapChainFlags);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int ResizeTarget (ModeDesc* pNewTargetParameters) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->ResizeTarget (ptr, pNewTargetParameters);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetContainingOutput<T0> (T0** ppOutput) where T0 : unmanaged, IOutput {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetContainingOutput (ptr, (void**) ppOutput);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetContainingOutput<T0> (out T0* ppOutput) where T0 : unmanaged, IOutput {
+		fixed (T0** _ppOutput = &ppOutput) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetContainingOutput (ptr, (void**) _ppOutput);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetFrameStatistics (FrameStatistics* pStats) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetFrameStatistics (ptr, pStats);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetFrameStatistics (out FrameStatistics pStats) {
+		fixed (FrameStatistics* _pStats = &pStats) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetFrameStatistics (ptr, _pStats);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetLastPresentCount (uint* pLastPresentCount) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetLastPresentCount (ptr, pLastPresentCount);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetLastPresentCount (out uint pLastPresentCount) {
+		fixed (uint* _pLastPresentCount = &pLastPresentCount) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetLastPresentCount (ptr, _pLastPresentCount);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetDesc1 (SwapChainDesc1* pDesc) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetDesc1 (ptr, pDesc);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetDesc1 (out SwapChainDesc1 pDesc) {
+		fixed (SwapChainDesc1* _pDesc = &pDesc) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetDesc1 (ptr, _pDesc);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetFullscreenDesc (SwapChainFullscreenDesc* pDesc) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetFullscreenDesc (ptr, pDesc);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetFullscreenDesc (out SwapChainFullscreenDesc pDesc) {
+		fixed (SwapChainFullscreenDesc* _pDesc = &pDesc) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetFullscreenDesc (ptr, _pDesc);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetHwnd (IntPtr* pHwnd) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetHwnd (ptr, pHwnd);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetHwnd (out IntPtr pHwnd) {
+		fixed (IntPtr* _pHwnd = &pHwnd) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetHwnd (ptr, _pHwnd);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetCoreWindow (Guid refiid, void** ppUnk) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetCoreWindow (ptr, refiid, ppUnk);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetCoreWindow (Guid refiid, out void* ppUnk) {
+		fixed (void** _ppUnk = &ppUnk) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetCoreWindow (ptr, refiid, _ppUnk);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int Present1 (uint syncInterval, uint presentFlags, PresentParameters* pPresentParameters) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->Present1 (ptr, syncInterval, presentFlags, pPresentParameters);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly bool IsTemporaryMonoSupported () {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->IsTemporaryMonoSupported (ptr) != 0;
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetRestrictToOutput<T0> (T0** ppRestrictToOutput) where T0 : unmanaged, IOutput {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetRestrictToOutput (ptr, (void**) ppRestrictToOutput);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetRestrictToOutput<T0> (out T0* ppRestrictToOutput) where T0 : unmanaged, IOutput {
+		fixed (T0** _ppRestrictToOutput = &ppRestrictToOutput) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetRestrictToOutput (ptr, (void**) _ppRestrictToOutput);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int SetBackgroundColor (Vector4F* pColor) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->SetBackgroundColor (ptr, pColor);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetBackgroundColor (Vector4F* pColor) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetBackgroundColor (ptr, pColor);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetBackgroundColor (out Vector4F pColor) {
+		fixed (Vector4F* _pColor = &pColor) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetBackgroundColor (ptr, _pColor);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int SetRotation (ModeRotation rotation) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->SetRotation (ptr, rotation);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetRotation (ModeRotation* pRotation) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetRotation (ptr, pRotation);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetRotation (out ModeRotation pRotation) {
+		fixed (ModeRotation* _pRotation = &pRotation) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetRotation (ptr, _pRotation);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int SetSourceSize (uint width, uint height) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->SetSourceSize (ptr, width, height);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetSourceSize (uint* pWidth, uint* pHeight) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetSourceSize (ptr, pWidth, pHeight);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetSourceSize (out uint pWidth, out uint pHeight) {
+		fixed (uint* _pWidth = &pWidth) {
+			fixed (uint* _pHeight = &pHeight) {
+				var ptr = GetCurrentPointer ();
+				var hr = ((FunctionPointer*) ptr->_pointer)->GetSourceSize (ptr, _pWidth, _pHeight);
+				return hr;
+			}
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int SetMaximumFrameLatency (uint maxLatency) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->SetMaximumFrameLatency (ptr, maxLatency);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetMaximumFrameLatency (uint* pMaxLatency) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetMaximumFrameLatency (ptr, pMaxLatency);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetMaximumFrameLatency (out uint pMaxLatency) {
+		fixed (uint* _pMaxLatency = &pMaxLatency) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetMaximumFrameLatency (ptr, _pMaxLatency);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly IntPtr GetFrameLatencyWaitableObject () {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetFrameLatencyWaitableObject (ptr);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int SetMatrixTransform (Matrix3x2F* pMatrix) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->SetMatrixTransform (ptr, pMatrix);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetMatrixTransform (Matrix3x2F* pMatrix) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetMatrixTransform (ptr, pMatrix);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int GetMatrixTransform (out Matrix3x2F pMatrix) {
+		fixed (Matrix3x2F* _pMatrix = &pMatrix) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->GetMatrixTransform (ptr, _pMatrix);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly uint GetCurrentBackBufferIndex () {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->GetCurrentBackBufferIndex (ptr);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int CheckColorSpaceSupport (ColorSpaceType colorSpace, uint* pColorSpaceSupport) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->CheckColorSpaceSupport (ptr, colorSpace, pColorSpaceSupport);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int CheckColorSpaceSupport (ColorSpaceType colorSpace, out uint pColorSpaceSupport) {
+		fixed (uint* _pColorSpaceSupport = &pColorSpaceSupport) {
+			var ptr = GetCurrentPointer ();
+			var hr = ((FunctionPointer*) ptr->_pointer)->CheckColorSpaceSupport (ptr, colorSpace, _pColorSpaceSupport);
+			return hr;
+		}
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int SetColorSpace1 (ColorSpaceType colorSpace) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->SetColorSpace1 (ptr, colorSpace);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int ResizeBuffers1<T0> (uint bufferCount, uint width, uint height, Format format, uint swapChainFlags, uint* pCreationNodeMask, T0* ppPresentQueue) where T0 : unmanaged, IUnknown {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->ResizeBuffers1 (ptr, bufferCount, width, height, format, swapChainFlags, pCreationNodeMask, ppPresentQueue);
+		return hr;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public readonly int SetHDRMetaData (HdrMetadataType type, uint size, void* pMetaData) {
+		var ptr = GetCurrentPointer ();
+		var hr = ((FunctionPointer*) ptr->_pointer)->SetHDRMetaData (ptr, type, size, pMetaData);
+		return hr;
+	}
+
+	[StructLayout (LayoutKind.Sequential)]
+	readonly struct FunctionPointer {
+		/// <summary>
+		/// OFFSET 0
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, Guid, void**, int> QueryInterface;
+		/// <summary>
+		/// OFFSET 1
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, uint> AddRef;
+		/// <summary>
+		/// OFFSET 2
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, uint> Release;
+		/// <summary>
+		/// OFFSET 3
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, Guid, uint, void*, int> SetPrivateData;
+		/// <summary>
+		/// OFFSET 4
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, Guid, void*, int> SetPrivateDataInterface;
+		/// <summary>
+		/// OFFSET 5
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, Guid, uint*, void*, int> GetPrivateData;
+		/// <summary>
+		/// OFFSET 6
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, Guid, void**, int> GetParent;
+		/// <summary>
+		/// OFFSET 7
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, Guid, void**, int> GetDevice;
+		/// <summary>
+		/// OFFSET 8
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, uint, uint, int> Present;
+		/// <summary>
+		/// OFFSET 9
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, uint, Guid, void**, int> GetBuffer;
+		/// <summary>
+		/// OFFSET 10
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, uint, void*, int> SetFullscreenState;
+		/// <summary>
+		/// OFFSET 11
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, uint*, void**, int> GetFullscreenState;
+		/// <summary>
+		/// OFFSET 12
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, SwapChainDesc*, int> GetDesc;
+		/// <summary>
+		/// OFFSET 13
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, uint, uint, uint, Format, uint, int> ResizeBuffers;
+		/// <summary>
+		/// OFFSET 14
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, ModeDesc*, int> ResizeTarget;
+		/// <summary>
+		/// OFFSET 15
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, void**, int> GetContainingOutput;
+		/// <summary>
+		/// OFFSET 16
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, FrameStatistics*, int> GetFrameStatistics;
+		/// <summary>
+		/// OFFSET 17
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, uint*, int> GetLastPresentCount;
+		/// <summary>
+		/// OFFSET 18
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, SwapChainDesc1*, int> GetDesc1;
+		/// <summary>
+		/// OFFSET 19
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, SwapChainFullscreenDesc*, int> GetFullscreenDesc;
+		/// <summary>
+		/// OFFSET 20
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, IntPtr*, int> GetHwnd;
+		/// <summary>
+		/// OFFSET 21
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, Guid, void**, int> GetCoreWindow;
+		/// <summary>
+		/// OFFSET 22
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, uint, uint, PresentParameters*, int> Present1;
+		/// <summary>
+		/// OFFSET 23
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, uint> IsTemporaryMonoSupported;
+		/// <summary>
+		/// OFFSET 24
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, void**, int> GetRestrictToOutput;
+		/// <summary>
+		/// OFFSET 25
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, Vector4F*, int> SetBackgroundColor;
+		/// <summary>
+		/// OFFSET 26
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, Vector4F*, int> GetBackgroundColor;
+		/// <summary>
+		/// OFFSET 27
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, ModeRotation, int> SetRotation;
+		/// <summary>
+		/// OFFSET 28
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, ModeRotation*, int> GetRotation;
+		/// <summary>
+		/// OFFSET 29
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, uint, uint, int> SetSourceSize;
+		/// <summary>
+		/// OFFSET 30
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, uint*, uint*, int> GetSourceSize;
+		/// <summary>
+		/// OFFSET 31
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, uint, int> SetMaximumFrameLatency;
+		/// <summary>
+		/// OFFSET 32
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, uint*, int> GetMaximumFrameLatency;
+		/// <summary>
+		/// OFFSET 33
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, IntPtr> GetFrameLatencyWaitableObject;
+		/// <summary>
+		/// OFFSET 34
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, Matrix3x2F*, int> SetMatrixTransform;
+		/// <summary>
+		/// OFFSET 35
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, Matrix3x2F*, int> GetMatrixTransform;
+		/// <summary>
+		/// OFFSET 36
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, uint> GetCurrentBackBufferIndex;
+		/// <summary>
+		/// OFFSET 37
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, ColorSpaceType, uint*, int> CheckColorSpaceSupport;
+		/// <summary>
+		/// OFFSET 38
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, ColorSpaceType, int> SetColorSpace1;
+		/// <summary>
+		/// OFFSET 39
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, uint, uint, uint, Format, uint, uint*, void*, int> ResizeBuffers1;
+		/// <summary>
+		/// OFFSET 40
+		/// </summary>
+		public readonly delegate* unmanaged[Stdcall]<void*, HdrMetadataType, uint, void*, int> SetHDRMetaData;
+	}
+
+	/// <inheritdoc />
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	public void Dispose () => Release ();
+}
